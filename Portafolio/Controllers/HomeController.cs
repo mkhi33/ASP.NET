@@ -13,9 +13,18 @@ public class HomeController : Controller
         _logger = logger;
     }
 
+    public List<Proyecto> ObtenerProyectos()
+    {
+        return ProyectosStore.ObtenerProyectos();
+        
+    }
+
     public IActionResult Index()
     {
-        return View();
+        var proyectos = ObtenerProyectos().Take(3).ToList();
+        var modelo = new HomeIndexViewModel() { Proyectos = proyectos };
+
+        return View(modelo);
     }
 
     public IActionResult Privacy()
