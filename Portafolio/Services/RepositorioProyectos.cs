@@ -1,8 +1,8 @@
 namespace Portafolio.Models
 {
-    public static class ProyectosStore
+    public class RepositorioProyectos
     {
-        public static List<Proyecto> ObtenerProyectos()
+        public List<Proyecto> ObtenerProyectos()
         {
             return new List<Proyecto>()
             {
