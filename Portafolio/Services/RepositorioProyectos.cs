@@ -1,8 +1,9 @@
 using Portafolio.Models;
+using Portafolio.Interfaces;
 
 namespace Portafolio.Services
 {
-    public class RepositorioProyectos
+    public class RepositorioProyectos :IRepositorioProyectos
     {
         public List<Proyecto> ObtenerProyectos()
         {
