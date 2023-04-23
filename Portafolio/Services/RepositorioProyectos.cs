@@ -1,4 +1,6 @@
-namespace Portafolio.Models
+using Portafolio.Models;
+
+namespace Portafolio.Services
 {
     public class RepositorioProyectos
     {
