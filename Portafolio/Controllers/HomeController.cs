@@ -10,10 +10,13 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly IRepositorioProyectos repositorioProyectos;
 
-    public HomeController(ILogger<HomeController> logger, IRepositorioProyectos repositorioProyectos)
+    public IServicioEmail ServicioEmail { get; }
+
+    public HomeController(ILogger<HomeController> logger, IRepositorioProyectos repositorioProyectos, IServicioEmail servicioEmail)
     {
         _logger = logger;
         this.repositorioProyectos = repositorioProyectos;
+        ServicioEmail = servicioEmail;
     }
 
     public IActionResult Index()
@@ -42,7 +45,8 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult Contacto(ContactoViewModel contactoViewModel) {
+    public async Task< IActionResult> Contacto(ContactoViewModel contactoViewModel) {
+        await ServicioEmail.Enviar(contactoViewModel);
         return RedirectToAction("Gracias");
     }
 
