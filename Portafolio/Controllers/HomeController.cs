@@ -29,6 +29,13 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Proyectos()
+    {
+        var proyectos = repositorioProyectos.ObtenerProyectos().ToList();
+
+        return View(proyectos);
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
