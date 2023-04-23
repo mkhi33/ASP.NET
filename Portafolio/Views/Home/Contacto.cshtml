@@ -7,15 +7,15 @@
 <form asp-controller="Home" asp-action="Contacto">
     <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="nombre" placeholder="Ej. Pedro Perez" />
+        <input name="Nombre" type="text" class="form-control" id="nombre" placeholder="Ej. Pedro Perez" />
     </div>
     <div class="mb-3">
         <label for="email" class="form-label">Correo</label>
-        <input type="email" class="form-control" id="email" placeholder="correo@correo.com" />
+        <input name="Email" type="email" class="form-control" id="email" placeholder="correo@correo.com" />
     </div>
     <div class="mb-3">
         <label for="mensaje" class="form-label">Mensaje</label>
-        <textarea class="form-control" id="mensaje" rows="3"></textarea>
+        <textarea name="Mensaje" class="form-control" id="mensaje" rows="3"></textarea>
     </div>
     <button class="btn btn-primary" type="submit">Enviar</button>
 
