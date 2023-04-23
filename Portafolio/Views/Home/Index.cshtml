@@ -4,29 +4,5 @@
 }
 <partial name="_Presentacion" />
 <partial name="_Habilidades" />
-@if(Model.Proyectos is not null) {
-    <div class="text-center" style="padding-top: 6rem;">
-        <h1>Mis trabajos recientes</h1>
-        <p>Aquí puedes ver algunos de mis trabajos recientes</p>
-        <div class="container">
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                @foreach (var proyecto in Model.Proyectos)
-                {
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="@proyecto.ImagenURL" class="card-img-top" alt="Imagen proyecto @proyecto.Titulo" />
-                            <div class="card-body">
-                                <h5 class="card-title">@proyecto.Titulo</h5>
-                                <p class="text">@proyecto.Descripcion</p>
-                            </div>
-                            <div class="card-footer">
-                                <a target="_blank" href="@proyecto.Link" class="btn btn-primary">Ver proyecto</a>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-}
+<partial name="_SeccionProyectos" model="Model.Proyectos" />
 
