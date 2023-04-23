@@ -13,15 +13,10 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public List<Proyecto> ObtenerProyectos()
-    {
-        return ProyectosStore.ObtenerProyectos();
-        
-    }
-
     public IActionResult Index()
     {
-        var proyectos = ObtenerProyectos().Take(3).ToList();
+        var repositorioProyectos = new RepositorioProyectos();
+        var proyectos = repositorioProyectos.ObtenerProyectos().Take(3).ToList();
         var modelo = new HomeIndexViewModel() { Proyectos = proyectos };
 
         return View(modelo);
