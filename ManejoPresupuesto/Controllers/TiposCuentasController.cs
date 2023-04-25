@@ -9,18 +9,9 @@ namespace ManejoPresupuesto.Controllers
     {
         private readonly string connectionString;
         private readonly ILogger<HomeController> _logger;
-        public TiposCuentasController(IConfiguration configuration, ILogger<HomeController> logger)
-        {
-            connectionString = configuration.GetConnectionString("DefaultConnection");
-            _logger = logger;
-        }
+
         public IActionResult Crear()
         {
-            using (var connection = new SqlConnection(connectionString))
-            {
-                var query = connection.Query("SELECT 1").FirstOrDefault();
-                _logger.LogInformation($"Query: {query}");
-            }
             return View();
         }
 
