@@ -1,0 +1,16 @@
+
+@{
+    ViewData["Title"] = "Crear Tipo Cuenta";
+}
+
+<h1>Crear Tipo de cuenta</h1>
+<h5>El tipo de cuenta se refiere a cómo podemos agrupar cuentas. Ejemplos: Préstamos, tarjetas de crédito, etc.</h5>
+
+<form asp-action="Crear" asp-controller="TiposCuentas">
+    <div class="mb-3">
+        <label for="Nombre" class="form-label">Nombre</label>
+        <input id="Nombre" name="Nombre" type="text" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
