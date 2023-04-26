@@ -4,6 +4,6 @@ namespace ManejoPresupuesto.Interfaces
 {
     public interface IRepositorioTiposCuentas
     {
-        void Crear(TipoCuenta tipoCuenta);
+        Task Crear(TipoCuenta tipoCuenta);
     }
 }

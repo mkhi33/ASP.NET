@@ -14,10 +14,10 @@ namespace ManejoPresupuesto.Services
             connectionString = configuration.GetConnectionString("defaultConnection");
         }
 
-        public void Crear(TipoCuenta tipoCuenta)
+        public async Task Crear(TipoCuenta tipoCuenta)
         {
             using var connection = new SqlConnection(connectionString);
-            var id = connection.QuerySingle<int>($@"INSERT INTO TiposCuentas (Nombre, UsuarioId, Orden) 
+            var id = await connection.QuerySingleAsync<int>($@"INSERT INTO TiposCuentas (Nombre, UsuarioId, Orden) 
                                                     VALUES (@Nombre, @UsuarioId, 0);
                                                     SELECT SCOPE_IDENTITY();", tipoCuenta);
             tipoCuenta.Id = id;
