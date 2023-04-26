@@ -35,5 +35,17 @@ namespace ManejoPresupuesto.Controllers
             await repositorioTiposCuentas.Crear(tipoCuenta);
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ExisteTipoCuenta(string nombre)
+        {
+            var usuarioId = 1;
+            var existeTipoCuenta = await repositorioTiposCuentas.Existe(nombre, usuarioId);
+            if( existeTipoCuenta )
+            {
+                return Json($"El nombre {nombre} ya existe");
+            }
+            return Json(true);
+        }
     }
 }
