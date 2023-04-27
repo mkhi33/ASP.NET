@@ -46,5 +46,11 @@ namespace ManejoPresupuesto.Services
             return await connection.QueryFirstOrDefaultAsync<TipoCuenta>(@"SELECT * FROM TiposCuentas WHERE Id = @id AND UsuarioId = @usuarioId;", new { id, usuarioId });
         }
 
+        public async Task Eliminar(int id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(@"DELETE FROM TiposCuentas WHERE Id = @id", new { id });
+        }
+
     }
 }
