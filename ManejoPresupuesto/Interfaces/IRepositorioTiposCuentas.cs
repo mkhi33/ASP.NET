@@ -10,5 +10,6 @@ namespace ManejoPresupuesto.Interfaces
         Task<IEnumerable<TipoCuenta>> ObtenerTiposCuentas(int usuarioId);
         Task<TipoCuenta> ObtenerTipoCuentaPorId(int id, int usuarioId);
         Task<IActionResult> ExisteTipoCuenta(string nombre);
+        Task Actualizar(TipoCuenta tipoCuenta);
     }
 }
