@@ -65,5 +65,17 @@ namespace ManejoPresupuesto.Controllers
             return View(tipoCuenta);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Editar(TipoCuenta tipoCuenta)
+        {
+            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
+            var tipoCuentaDb = await repositorioTiposCuentas.ObtenerTipoCuentaPorId(tipoCuenta.Id, usuarioId);
+            if(tipoCuentaDb is null) {
+                return RedirectToAction("NoEncontrado", "Home");
+            }
+            await repositorioTiposCuentas.Actualizar(tipoCuenta);
+            return RedirectToAction("Index");
+        }
+
     }
 }
