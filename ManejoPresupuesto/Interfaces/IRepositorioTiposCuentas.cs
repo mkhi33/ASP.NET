@@ -1,4 +1,5 @@
 using ManejoPresupuesto.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ManejoPresupuesto.Interfaces
 {
@@ -7,5 +8,7 @@ namespace ManejoPresupuesto.Interfaces
         Task Crear(TipoCuenta tipoCuenta);
         Task<bool> Existe(string nombre, int usuarioId);
         Task<IEnumerable<TipoCuenta>> ObtenerTiposCuentas(int usuarioId);
+        Task<TipoCuenta> ObtenerTipoCuentaPorId(int id, int usuarioId);
+        Task<IActionResult> ExisteTipoCuenta(string nombre);
     }
 }
