@@ -10,11 +10,13 @@ namespace ManejoPresupuesto.Controllers
     {
         private readonly IRepositorioTiposCuentas repositorioTiposCuentas;
         private readonly IServicioUsuarios servicioUsuarios;
+        private readonly IRepositorioCuentas repositorioCuentas;
 
-        public CuentasController(IRepositorioTiposCuentas repositorioTiposCuentas, IServicioUsuarios servicioUsuarios)
+        public CuentasController(IRepositorioTiposCuentas repositorioTiposCuentas, IServicioUsuarios servicioUsuarios, IRepositorioCuentas repositorioCuentas)
         {
             this.repositorioTiposCuentas = repositorioTiposCuentas;
             this.servicioUsuarios = servicioUsuarios;
+            this.repositorioCuentas = repositorioCuentas;
         }
         [HttpGet]
         public async Task<IActionResult> Crear()
@@ -25,5 +27,6 @@ namespace ManejoPresupuesto.Controllers
             modelo.TiposCuentas = tiposCuentas.Select( x => new SelectListItem(x.Nombre, x.Id.ToString()));
             return View(modelo);
         }
+        
     }
 }
