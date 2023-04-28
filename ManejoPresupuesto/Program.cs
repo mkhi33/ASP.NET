@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IRepositorioTiposCuentas, RepositorioTiposCuentas>();
 builder.Services.AddTransient<IServicioUsuarios, ServicioUsuarios>();
-
+builder.Services.AddTransient<IRepositorioCuentas, RepositorioCuentas>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
