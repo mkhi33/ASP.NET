@@ -11,5 +11,6 @@ namespace ManejoPresupuesto.Interfaces
         Task<TipoCuenta> ObtenerTipoCuentaPorId(int id, int usuarioId);
         Task Actualizar(TipoCuenta tipoCuenta);
         Task Eliminar(int id);
+        Task Ordenar( IEnumerable<TipoCuenta> tipoCuentasOrdenados);
     }
 }
