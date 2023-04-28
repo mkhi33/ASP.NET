@@ -6,7 +6,7 @@ namespace ManejoPresupuesto.Interfaces
     public interface IRepositorioCuentas
     {
         Task Crear(Cuenta cuenta);
-        Task<IEnumerable<Cuenta>> Buscar(int usuarioId)
+        Task<IEnumerable<Cuenta>> Buscar(int usuarioId);
 
     }
 }
