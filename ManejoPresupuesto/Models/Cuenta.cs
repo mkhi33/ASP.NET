@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using ManejoPresupuesto.Models;
 using ManejoPresupuesto.Validaciones;
 
-namespace MenejoPresupuesto.Models
+namespace ManejoPresupuesto.Models
 {
     public class Cuenta
     {
