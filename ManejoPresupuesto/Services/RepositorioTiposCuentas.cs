@@ -1,4 +1,5 @@
 
+using System.Data;
 using Dapper;
 using ManejoPresupuesto.Interfaces;
 using ManejoPresupuesto.Models;
@@ -17,9 +18,7 @@ namespace ManejoPresupuesto.Services
         public async Task Crear(TipoCuenta tipoCuenta)
         {
             using var connection = new SqlConnection(connectionString);
-            var id = await connection.QuerySingleAsync<int>($@"INSERT INTO TiposCuentas (Nombre, UsuarioId, Orden) 
-                                                    VALUES (@Nombre, @UsuarioId, 0);
-                                                    SELECT SCOPE_IDENTITY();", tipoCuenta);
+            var id = await connection.QuerySingleAsync<int>("TiposCuentas_Insertar", new {usuarioId = tipoCuenta.UsuarioId, nombre = tipoCuenta.Nombre}, commandType: CommandType.StoredProcedure);
             tipoCuenta.Id = id;
         }
 
