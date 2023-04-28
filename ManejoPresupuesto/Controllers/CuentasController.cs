@@ -23,7 +23,7 @@ namespace ManejoPresupuesto.Controllers
             var tiposCuentas = await repositorioTiposCuentas.ObtenerTiposCuentas(usuarioId);
             var modelo = new CuentaCreacionViewModel();
             modelo.TiposCuentas = tiposCuentas.Select( x => new SelectListItem(x.Nombre, x.Id.ToString()));
-            return View();
+            return View(modelo);
         }
     }
 }
