@@ -14,7 +14,7 @@
     </div>
     <div class="mb-3">
         <label asp-for="TipoCuentaId" class="form-label"></label>
-        <select asp-for="TipoCuentaId" asp-items="@Model.TiposCuentas"></select>
+        <select asp-for="TipoCuentaId" asp-items="@Model.TiposCuentas" class="form-select"></select>
         <span asp-validation-for="TipoCuentaId" class="text-danger"></span>
     </div>
     <div class="mb-3">
