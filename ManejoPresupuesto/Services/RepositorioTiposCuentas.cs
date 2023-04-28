@@ -43,13 +43,20 @@ namespace ManejoPresupuesto.Services
         public async Task<TipoCuenta> ObtenerTipoCuentaPorId(int id, int usuarioId)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryFirstOrDefaultAsync<TipoCuenta>(@"SELECT * FROM TiposCuentas WHERE Id = @id AND UsuarioId = @usuarioId;", new { id, usuarioId });
+            return await connection.QueryFirstOrDefaultAsync<TipoCuenta>(@"SELECT * FROM TiposCuentas WHERE Id = @id AND UsuarioId = @usuarioId ORDER BY Orden;", new { id, usuarioId });
         }
 
         public async Task Eliminar(int id)
         {
             using var connection = new SqlConnection(connectionString);
             await connection.ExecuteAsync(@"DELETE FROM TiposCuentas WHERE Id = @id", new { id });
+        }
+
+        public async Task Ordenar( IEnumerable<TipoCuenta> tipoCuentasOrdenados)
+        {
+            var query = "UPDATE TiposCuentas SET Orden = @Orden WHERE Id = @Id;";
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(query, tipoCuentasOrdenados);
         }
 
     }
