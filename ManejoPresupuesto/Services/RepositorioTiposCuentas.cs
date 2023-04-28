@@ -32,7 +32,7 @@ namespace ManejoPresupuesto.Services
         public async Task<IEnumerable<TipoCuenta>> ObtenerTiposCuentas(int usuarioId)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryAsync<TipoCuenta>(@"SELECT * FROM TiposCuentas WHERE UsuarioId = @usuarioId;", new { usuarioId });
+            return await connection.QueryAsync<TipoCuenta>(@"SELECT * FROM TiposCuentas WHERE UsuarioId = @usuarioId ORDER BY Orden;", new { usuarioId });
         }
 
         public async Task Actualizar(TipoCuenta tipoCuenta)
@@ -43,7 +43,7 @@ namespace ManejoPresupuesto.Services
         public async Task<TipoCuenta> ObtenerTipoCuentaPorId(int id, int usuarioId)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryFirstOrDefaultAsync<TipoCuenta>(@"SELECT * FROM TiposCuentas WHERE Id = @id AND UsuarioId = @usuarioId ORDER BY Orden;", new { id, usuarioId });
+            return await connection.QueryFirstOrDefaultAsync<TipoCuenta>(@"SELECT * FROM TiposCuentas WHERE Id = @id AND UsuarioId = @usuarioId;", new { id, usuarioId });
         }
 
         public async Task Eliminar(int id)
