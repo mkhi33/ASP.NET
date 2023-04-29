@@ -55,13 +55,16 @@ namespace ManejoPresupuesto.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Editar(Categoria categoria){
-            if(!ModelState.IsValid){
+        public async Task<IActionResult> Editar(Categoria categoria)
+        {
+            if (!ModelState.IsValid)
+            {
                 return View(categoria);
             }
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
             var categoriaDb = await repositorioCategorias.ObtenerPorId(categoria.Id, usuarioId);
-            if(categoriaDb is null){
+            if (categoriaDb is null)
+            {
                 return RedirectToAction("NoEncontrado", "Home");
             }
             categoria.UsuarioId = usuarioId;
@@ -69,6 +72,17 @@ namespace ManejoPresupuesto.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Eliminar(int id)
+        {
+            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
+            var categoria = await repositorioCategorias.ObtenerPorId(id, usuarioId);
+            if(categoria is null)
+            {
+                return RedirectToAction("NoEncontrado", "Home");
+            }
+            return View(categoria);
+        }
 
     }
 }
