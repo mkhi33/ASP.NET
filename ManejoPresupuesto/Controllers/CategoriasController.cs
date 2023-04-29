@@ -16,10 +16,12 @@ namespace ManejoPresupuesto.Controllers
             this.repositorioCategorias = repositorioCategorias;
             this.servicioUsuarios = servicioUsuarios;
         }
-        
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
+            var categorias = await  repositorioCategorias.Obtener(usuarioId);
+            return View(categorias);
         }
 
         [HttpGet]
@@ -30,7 +32,7 @@ namespace ManejoPresupuesto.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear(Categoria categoria)
         {
-            if( !ModelState.IsValid )
+            if (!ModelState.IsValid)
             {
                 return View(categoria);
             }
@@ -38,7 +40,7 @@ namespace ManejoPresupuesto.Controllers
             categoria.UsuarioId = usuarioId;
             await repositorioCategorias.Crear(categoria);
             return RedirectToAction("Index");
-        
+
         }
 
 
