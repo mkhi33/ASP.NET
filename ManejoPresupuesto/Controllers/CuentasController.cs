@@ -74,6 +74,7 @@ namespace ManejoPresupuesto.Controllers
                 Nombre= cuenta.Nombre,
                 Descripcion= cuenta.Descripcion,
                 Balance= cuenta.Balance,
+                TipoCuentaId= cuenta.TipoCuentaId
             };
 
             modelo.TiposCuentas = await ObtenerTiposCuentas(usuarioId);
@@ -88,7 +89,7 @@ namespace ManejoPresupuesto.Controllers
             {
                 return RedirectToAction("NoEncontrado", "Home");
             }
-            var tipoCuenta = await repositorioCuentas.ObtenerPorId(cuentaEditar.TipoCuentaId, usuarioId);
+            var tipoCuenta = await repositorioTiposCuentas.ObtenerTipoCuentaPorId(cuentaEditar.TipoCuentaId, usuarioId);
             if(tipoCuenta is null)
             {
                 return RedirectToAction("NoEncontrado", "Home");
