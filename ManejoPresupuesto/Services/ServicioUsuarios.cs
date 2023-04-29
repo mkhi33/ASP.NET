@@ -6,7 +6,7 @@ namespace ManejoPresupuesto.Services
     {
         public int ObtenerUsuarioId()
         {
-            return 1;
+            return 2;
         }
         
     }
