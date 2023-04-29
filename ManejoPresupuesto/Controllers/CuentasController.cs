@@ -24,7 +24,7 @@ namespace ManejoPresupuesto.Controllers
             var cuentasConTipoCuentas = await repositorioCuentas.Buscar(usuarioId);
             var modelo = cuentasConTipoCuentas
                 .GroupBy(x => x.TipoCuenta)
-                .Select( grupo => new IndiceCuentasViewModel
+                .Select(grupo => new IndiceCuentasViewModel
                 {
                     TipoCuenta = grupo.Key,
                     Cuentas = grupo
@@ -58,6 +58,26 @@ namespace ManejoPresupuesto.Controllers
             await repositorioCuentas.Crear(cuentaCreacionViewModel);
             return RedirectToAction("Index");
 
+        }
+
+        public async Task<IActionResult> Editar(int id)
+        {
+            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
+            var cuenta = await repositorioCuentas.ObtenerPorId(id, usuarioId);
+            if (cuenta is null)
+            {
+                return RedirectToAction("NoEncontrado", "Home");
+            }
+            var modelo = new CuentaCreacionViewModel()
+            {
+                Id= cuenta.Id,
+                Nombre= cuenta.Nombre,
+                Descripcion= cuenta.Descripcion,
+                Balance= cuenta.Balance,
+            };
+
+            modelo.TiposCuentas = await ObtenerTiposCuentas(usuarioId);
+            return View(modelo);
         }
 
         private async Task<IEnumerable<SelectListItem>> ObtenerTiposCuentas(int usuarioId)
