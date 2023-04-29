@@ -97,6 +97,16 @@ namespace ManejoPresupuesto.Controllers
 
 
         }
+        [HttpGet]
+        public async Task<IActionResult> Eliminar(int id){
+            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
+            var cuenta = await repositorioCuentas.ObtenerPorId(id, usuarioId);
+            if(cuenta is null)
+            {
+                return RedirectToAction("NoEncontrado", "Home");
+            }
+            return View(cuenta);
+        }
 
         private async Task<IEnumerable<SelectListItem>> ObtenerTiposCuentas(int usuarioId)
         {
