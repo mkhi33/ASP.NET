@@ -3,7 +3,7 @@ namespace ManejoPresupuesto.Models
 {
     public enum TipoOperacion
     {
-        Ingreso = 1,
-        Gasto = 2,
+        Ingreso = 0,
+        Gasto = 1,
     }
 }
