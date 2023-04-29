@@ -82,12 +82,12 @@ namespace ManejoPresupuesto.Controllers
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
             var cuenta = await repositorioCuentas.ObtenerPorId(cuentaEditar.Id, usuarioId);
-            if(cuenta is null)
+            if (cuenta is null)
             {
                 return RedirectToAction("NoEncontrado", "Home");
             }
             var tipoCuenta = await repositorioTiposCuentas.ObtenerTipoCuentaPorId(cuentaEditar.TipoCuentaId, usuarioId);
-            if(tipoCuenta is null)
+            if (tipoCuenta is null)
             {
                 return RedirectToAction("NoEncontrado", "Home");
             }
@@ -98,14 +98,27 @@ namespace ManejoPresupuesto.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> Eliminar(int id){
+        public async Task<IActionResult> Eliminar(int id)
+        {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
             var cuenta = await repositorioCuentas.ObtenerPorId(id, usuarioId);
-            if(cuenta is null)
+            if (cuenta is null)
             {
                 return RedirectToAction("NoEncontrado", "Home");
             }
             return View(cuenta);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EliminarCuenta(int id)
+        {
+            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
+            var cuenta = await repositorioCuentas.ObtenerPorId(id, usuarioId);
+            if (cuenta is null)
+            {
+                return RedirectToAction("NoEncontrado", "Home");
+            }
+            await repositorioCuentas.Eliminar(id);
+            return RedirectToAction("Index");
         }
 
         private async Task<IEnumerable<SelectListItem>> ObtenerTiposCuentas(int usuarioId)
