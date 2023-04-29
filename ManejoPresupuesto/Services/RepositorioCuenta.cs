@@ -50,5 +50,14 @@ namespace ManejoPresupuesto.Services
                 new { usuarioId, id }
             );
         }
+
+        public async Task Actualizar(CuentaCreacionViewModel cuenta)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(
+                @"UPDATE Cuentas SET Nombre = @Nombre, Balance = @Balance, Descripcion = @Descripcion, TipoCuentaId = @TipoCuentaId WHERE Id = @Id",
+                cuenta
+            );
+        }
     }
 }
