@@ -49,5 +49,14 @@ namespace ManejoPresupuesto.Services
                 new { categoria.Nombre, categoria.TipoOperacionId, categoria.Id, categoria.UsuarioId }
             );
         }
+
+        public async Task Eliminar(int id, int usuarioId)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(
+                "DELETE FROM Categorias WHERE Id = @id AND UsuarioId = @usuarioId",
+                new { id, usuarioId }
+            );
+        }
     }
 }
