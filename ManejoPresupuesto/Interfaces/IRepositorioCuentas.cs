@@ -9,6 +9,7 @@ namespace ManejoPresupuesto.Interfaces
         Task<IEnumerable<Cuenta>> Buscar(int usuarioId);
         Task<Cuenta> ObtenerPorId(int id, int usuarioId);
         Task Actualizar(CuentaCreacionViewModel cuenta);
+        Task Eliminar(int id);
 
     }
 }

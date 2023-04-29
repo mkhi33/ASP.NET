@@ -59,5 +59,14 @@ namespace ManejoPresupuesto.Services
                 cuenta
             );
         }
+
+        public async Task Eliminar(int id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(
+                @"DELETE FROM Cuentas WHERE Id = @Id",
+                new { id }
+            );
+        }
     }
 }
