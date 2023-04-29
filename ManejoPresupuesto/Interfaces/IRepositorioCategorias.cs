@@ -10,5 +10,6 @@ namespace ManejoPresupuesto.Interfaces
     {
         Task Crear(Categoria categoria);
         Task<IEnumerable<Categoria>> Obtener(int usuarioId);
+        Task<Categoria> ObtenerPorId(int id, int usuarioId);
     }
 }
