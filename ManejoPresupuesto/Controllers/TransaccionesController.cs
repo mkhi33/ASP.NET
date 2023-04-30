@@ -11,12 +11,14 @@ namespace ManejoPresupuesto.Controllers
     {
         private readonly IRepositorioTransacciones repositorioTransacciones;
         private readonly IRepositorioCuentas repositorioCuentas;
+        private readonly IRepositorioCategorias repositorioCategorias;
         private readonly IServicioUsuarios servicioUsuarios;
 
-        public TransaccionesController(IRepositorioTransacciones repositorioTransacciones, IRepositorioCuentas repositorioCuentas, IServicioUsuarios servicioUsuarios)
+        public TransaccionesController(IRepositorioTransacciones repositorioTransacciones, IRepositorioCuentas repositorioCuentas, IRepositorioCategorias repositorioCategorias, IServicioUsuarios servicioUsuarios)
         {
             this.repositorioTransacciones = repositorioTransacciones;
             this.repositorioCuentas = repositorioCuentas;
+            this.repositorioCategorias = repositorioCategorias;
             this.servicioUsuarios = servicioUsuarios;
         }
 
@@ -34,13 +36,25 @@ namespace ManejoPresupuesto.Controllers
             return View(modelo);
         }
 
+        [HttpPost("Crear")]
+        public async Task<IActionResult> ObtenerCategorias([FromBody] TipoOperacion tipoOperacion)
+        {
+            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
+            var categorias = await ObtenerCategorias(usuarioId, tipoOperacion);
+            return Ok(categorias);
+        }
+
+        private async Task<IEnumerable<SelectListItem>> ObtenerCategorias(int usuarioId, TipoOperacion tipoOperacion)
+        {
+            var categorias = await repositorioCategorias.Obtener(usuarioId, tipoOperacion);
+            return categorias.Select(x => new SelectListItem(x.Nombre, x.Id.ToString()));
+        }
+
         private async Task<IEnumerable<SelectListItem>> ObtenerCuentas(int usuarioId)
         {
             var cuentas = await repositorioCuentas.Buscar(usuarioId);
             return cuentas.Select(x => new SelectListItem(x.Nombre, x.Id.ToString()));
         }
-
-
 
     }
 }
