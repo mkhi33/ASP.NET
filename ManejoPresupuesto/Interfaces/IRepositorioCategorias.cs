@@ -13,5 +13,6 @@ namespace ManejoPresupuesto.Interfaces
         Task<Categoria> ObtenerPorId(int id, int usuarioId);
         Task Actualizar(Categoria categoria);
         Task Eliminar(int id, int usuarioId);
+        Task<IEnumerable<Categoria>> Obtener(int usuarioId, TipoOperacion tipoOperacionId);
     }
 }
