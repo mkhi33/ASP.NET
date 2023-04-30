@@ -1,15 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
+using System.ComponentModel.DataAnnotations;
 namespace ManejoPresupuesto.Models
 {
     public class Transaccion
     {
         public int Id { get; set; }
         public int UsuarioId { get; set; }
+        [Display(Name = "Fecha de Transacción")]
+        [DataType(DataType.Date)]
         public DateTime FechaTransaccion { get; set; } = DateTime.Today;
         public decimal Monto { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "Seleccione una categoría")]
