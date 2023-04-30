@@ -33,6 +33,7 @@ namespace ManejoPresupuesto.Controllers
             var UsuarioId = servicioUsuarios.ObtenerUsuarioId();
             var modelo = new TransaccionCreacionViewModel();
             modelo.Cuentas = await ObtenerCuentas(UsuarioId);
+            modelo.Categorias = await ObtenerCategorias(UsuarioId, modelo.TipoOperacionId);
             return View(modelo);
         }
 
