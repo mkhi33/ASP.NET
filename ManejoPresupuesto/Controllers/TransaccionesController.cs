@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using ManejoPresupuesto.Interfaces;
 using ManejoPresupuesto.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
+
 
 namespace ManejoPresupuesto.Controllers
 {
@@ -24,6 +19,13 @@ namespace ManejoPresupuesto.Controllers
             this.repositorioCuentas = repositorioCuentas;
             this.servicioUsuarios = servicioUsuarios;
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet("Crear")]
         public async Task<IActionResult> Crear()
         {
             var UsuarioId = servicioUsuarios.ObtenerUsuarioId();
