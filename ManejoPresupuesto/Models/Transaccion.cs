@@ -14,7 +14,7 @@ namespace ManejoPresupuesto.Models
         public decimal Monto { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "Seleccione una categoría")]
         public int CategoriaId { get; set; }
-        [StringLength(maximumLength: 1000, ErrorMessage = "La nota no puede tener más de {1} caracteres"))]
+        [StringLength(maximumLength: 1000, ErrorMessage = "La nota no puede tener más de {1} caracteres")]
         public string Nota { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "Seleccione una Cuenta")]
         public int CuentaId { get; set; }
