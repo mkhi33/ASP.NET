@@ -10,5 +10,6 @@ namespace ManejoPresupuesto.Models
     {
         public IEnumerable<SelectListItem> Cuentas { get; set; }
         public IEnumerable<SelectListItem> Categorias { get; set; }
+        public TipoOperacion TipoOperacionId { get; set; }
     }
 }
