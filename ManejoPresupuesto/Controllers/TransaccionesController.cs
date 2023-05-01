@@ -121,6 +121,19 @@ namespace ManejoPresupuesto.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost("Eliminar/{id}")]
+        public async Task<IActionResult> Borrar(int id)
+        {
+            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
+            var transaccion = await repositorioTransacciones.ObtenerPorId(id, usuarioId);
+            if (transaccion is null)
+            {
+                return RedirectToAction("NoEncontrado", "Home");
+            }
+            await repositorioTransacciones.Borrar(id);
+            return RedirectToAction("Index");
+        }
+
         [HttpPost]
         public async Task<IActionResult> ObtenerCategorias([FromBody] TipoOperacion tipoOperacion)
         {
