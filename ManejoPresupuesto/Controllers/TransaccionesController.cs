@@ -68,7 +68,7 @@ namespace ManejoPresupuesto.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
+        [HttpGet("Editar/{id}")]
         public async Task<IActionResult> Editar(int id)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
@@ -92,7 +92,7 @@ namespace ManejoPresupuesto.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost("Editar/{id}")]
         public async Task<IActionResult> Editar(TransaccionActualizacionViewModel modelo)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
