@@ -32,5 +32,22 @@ namespace ManejoPresupuesto.Services
             commandType: System.Data.CommandType.StoredProcedure);
             transaccion.Id = id;
         }
+
+        public async Task Actualizar(Transaccion transaccion, decimal montoAnterior, int cuentaAnteriorId)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync("Transacciones_Actualizar",
+            new
+            {
+                transaccion.Id,
+                transaccion.FechaTransaccion,
+                transaccion.Monto,
+                transaccion.CategoriaId,
+                transaccion.CuentaId,
+                transaccion.Nota,
+                montoAnterior,
+                cuentaAnteriorId
+            }, commandType: System.Data.CommandType.StoredProcedure);
+        }
     }
 }
