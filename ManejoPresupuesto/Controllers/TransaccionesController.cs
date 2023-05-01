@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ManejoPresupuesto.Controllers
 {
-    [Route("[controller]")]
     public class TransaccionesController : Controller
     {
         private readonly IRepositorioTransacciones repositorioTransacciones;
@@ -30,7 +29,7 @@ namespace ManejoPresupuesto.Controllers
             return View();
         }
 
-        [HttpGet("Crear")]
+        [HttpGet]
         public async Task<IActionResult> Crear()
         {
             var UsuarioId = servicioUsuarios.ObtenerUsuarioId();
@@ -39,7 +38,7 @@ namespace ManejoPresupuesto.Controllers
             modelo.Categorias = await ObtenerCategorias(UsuarioId, modelo.TipoOperacionId);
             return View(modelo);
         }
-        [HttpPost("Crear")]
+        [HttpPost]
         public async Task<IActionResult> Crear(TransaccionCreacionViewModel modelo)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
@@ -68,7 +67,7 @@ namespace ManejoPresupuesto.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet("Editar/{id}")]
+        [HttpGet]
         public async Task<IActionResult> Editar(int id)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
@@ -92,7 +91,7 @@ namespace ManejoPresupuesto.Controllers
 
         }
 
-        [HttpPost("Editar/{id}")]
+        [HttpPost]
         public async Task<IActionResult> Editar(TransaccionActualizacionViewModel modelo)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
@@ -121,8 +120,7 @@ namespace ManejoPresupuesto.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost("Eliminar/{id}")]
-        public async Task<IActionResult> Borrar(int id)
+        public async Task<IActionResult> Eliminar(int id)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
             var transaccion = await repositorioTransacciones.ObtenerPorId(id, usuarioId);
