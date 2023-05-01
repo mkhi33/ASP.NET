@@ -45,24 +45,13 @@
 </form>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
 
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/FormularioTransacciones.js" asp-append-version="true"></script>
     <script>
         const urlObtenerCategorias = '@Url.Action("ObtenerCategorias", "Transacciones")';
         $(function () {
-            $("#TipoOperacionId").change(async function () {
-                const valorSeleccionado = $(this).val();
-                const respuesta = await fetch(urlObtenerCategorias, {
-                    method: "POST",
-                    body: valorSeleccionado,
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                });
-                const json = await respuesta.json();
-                const opciones = json.map(categoria => `<option value="${categoria.value}">${categoria.text}</option>`);
-                $("#CategoriaId").html(opciones);
-            })
+            inicializarFormularioTransacciones(urlObtenerCategorias);
         });
 
     </script>
