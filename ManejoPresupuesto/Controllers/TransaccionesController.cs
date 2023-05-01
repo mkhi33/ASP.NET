@@ -22,7 +22,6 @@ namespace ManejoPresupuesto.Controllers
             this.servicioUsuarios = servicioUsuarios;
         }
 
-        [HttpGet("Index")]
         public IActionResult Index()
         {
             return View();
@@ -36,6 +35,34 @@ namespace ManejoPresupuesto.Controllers
             modelo.Cuentas = await ObtenerCuentas(UsuarioId);
             modelo.Categorias = await ObtenerCategorias(UsuarioId, modelo.TipoOperacionId);
             return View(modelo);
+        }
+        [HttpPost("Crear")]
+        public async Task<IActionResult> Crear(TransaccionCreacionViewModel modelo)
+        {
+            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
+            if (!ModelState.IsValid)
+            {
+                modelo.Cuentas = await ObtenerCuentas(usuarioId);
+                modelo.Categorias = await ObtenerCategorias(usuarioId, modelo.TipoOperacionId);
+                return View(modelo);
+            }
+            var cuenta = await repositorioCuentas.ObtenerPorId(modelo.CuentaId, usuarioId);
+            if (cuenta is null)
+            {
+                return RedirectToAction("NoEncontrado", "Home");
+            }
+            var categorias = await repositorioCategorias.ObtenerPorId(modelo.CategoriaId, usuarioId);
+            if (categorias is null)
+            {
+                return RedirectToAction("NoEncontrado", "Home");
+            }
+            modelo.UsuarioId = usuarioId;
+            if (modelo.TipoOperacionId == TipoOperacion.Gasto)
+            {
+                modelo.Monto *= -1;
+            }
+            await repositorioTransacciones.Crear(modelo);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
