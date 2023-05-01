@@ -1,3 +1,4 @@
+using AutoMapper;
 using ManejoPresupuesto.Interfaces;
 using ManejoPresupuesto.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +14,15 @@ namespace ManejoPresupuesto.Controllers
         private readonly IRepositorioCuentas repositorioCuentas;
         private readonly IRepositorioCategorias repositorioCategorias;
         private readonly IServicioUsuarios servicioUsuarios;
+        private readonly IMapper mapper;
 
-        public TransaccionesController(IRepositorioTransacciones repositorioTransacciones, IRepositorioCuentas repositorioCuentas, IRepositorioCategorias repositorioCategorias, IServicioUsuarios servicioUsuarios)
+        public TransaccionesController(IRepositorioTransacciones repositorioTransacciones, IRepositorioCuentas repositorioCuentas, IRepositorioCategorias repositorioCategorias, IServicioUsuarios servicioUsuarios, IMapper mapper)
         {
             this.repositorioTransacciones = repositorioTransacciones;
             this.repositorioCuentas = repositorioCuentas;
             this.repositorioCategorias = repositorioCategorias;
             this.servicioUsuarios = servicioUsuarios;
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
@@ -63,6 +66,28 @@ namespace ManejoPresupuesto.Controllers
             }
             await repositorioTransacciones.Crear(modelo);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Editar(int id)
+        {
+            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
+            var transaccion = await repositorioTransacciones.ObtenerPorId(id, usuarioId);
+            if (transaccion is null)
+            {
+                return RedirectToAction("NoEncontrado", "Home");
+            }
+            var modelo = mapper.Map<TransaccionActualizacionViewModel>(transaccion);
+            if (modelo.TipoOperacionId == TipoOperacion.Gasto)
+            {
+                modelo.MontoAnterior = modelo.Monto * -1;
+            }
+            modelo.CuentaAnteriorId = transaccion.CuentaId;
+            modelo.Categorias = await ObtenerCategorias(usuarioId, modelo.TipoOperacionId);
+            modelo.Cuentas = await ObtenerCuentas(usuarioId);
+            return View(modelo);
+
+
         }
 
         [HttpPost]
