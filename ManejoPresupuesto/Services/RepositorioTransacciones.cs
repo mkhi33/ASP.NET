@@ -61,5 +61,11 @@ namespace ManejoPresupuesto.Services
                 new { id, usuarioId }
             );
         }
+
+        public async Task Borrar(int id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync("Transacciones_Borrar", new { id }, commandType: System.Data.CommandType.StoredProcedure);
+        }
     }
 }
