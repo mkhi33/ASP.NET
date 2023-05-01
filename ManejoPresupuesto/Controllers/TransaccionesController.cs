@@ -22,6 +22,7 @@ namespace ManejoPresupuesto.Controllers
             this.servicioUsuarios = servicioUsuarios;
         }
 
+        [HttpGet("Index")]
         public IActionResult Index()
         {
             return View();
@@ -37,7 +38,7 @@ namespace ManejoPresupuesto.Controllers
             return View(modelo);
         }
 
-        [HttpPost("Crear")]
+        [HttpPost]
         public async Task<IActionResult> ObtenerCategorias([FromBody] TipoOperacion tipoOperacion)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
