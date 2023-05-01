@@ -49,5 +49,17 @@ namespace ManejoPresupuesto.Services
                 cuentaAnteriorId
             }, commandType: System.Data.CommandType.StoredProcedure);
         }
+
+        public async Task<Transaccion> ObtenerPorId(int id, int usuarioId)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryFirstOrDefaultAsync<Transaccion>(
+                @"SELECT Transacciones.*, cat.TipoOperacionId FROM Transacciones
+                    INNER JOIN Categorias cat 
+                        ON cat.Id = Transacciones.CategoriaId 
+                WHERE Transacciones.Id = @Id AND Transacciones.UsuarioId  = @UsuarioId;",
+                new { id, usuarioId }
+            );
+        }
     }
 }
