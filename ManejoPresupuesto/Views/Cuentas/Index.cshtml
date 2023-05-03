@@ -60,12 +60,12 @@
             <div id="@id" class="accordion-collapse collapse show">
                 <div>
                     <ul class="list-group">
-                        @foreach (var  cuenta in tipoCuenta.Cuentas)
+                        @foreach (var cuenta in tipoCuenta.Cuentas)
                         {
                             var claseCuenta = ObtenerClaseBalance(cuenta.Balance);
                             <li class="list-group-item">
                                 <span>
-                                    <strong>@cuenta.Nombre</strong>
+                                    <strong><a asp-action="Detalle" asp-route-id="@cuenta.Id">@cuenta.Nombre</a></strong>
                                     <a class="btn btn-primary" asp-action="Editar" asp-route-id="@cuenta.Id">
                                         <i class="bi-pencil-fill"></i>
                                     </a>
@@ -81,6 +81,6 @@
                 </div>
 
             </div>
-       </div> 
+        </div>
     }
 </div>
