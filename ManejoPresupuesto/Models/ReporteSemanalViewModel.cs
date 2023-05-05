@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ManejoPresupuesto.Models;
 
-namespace ManejoPresupuesto.Views
+namespace ManejoPresupuesto.Models
 {
     public class ReporteSemanalViewModel
     {
