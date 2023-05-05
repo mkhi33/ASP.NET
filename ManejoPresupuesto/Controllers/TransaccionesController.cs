@@ -32,6 +32,18 @@ namespace ManejoPresupuesto.Controllers
             var modelo = await servicioReportes.ObtenerReporteTransaccionesDetalladas(usuarioId, mes, año, ViewBag);
             return View(modelo);
         }
+        public IActionResult Semanal(){
+            return View();
+        }
+        public IActionResult Mensual(){
+            return View();
+        }
+        public IActionResult ExcelReporte(){
+            return View();
+        }
+        public IActionResult Calendario(){
+            return View();
+        }
 
         [HttpGet]
         public async Task<IActionResult> Crear()
