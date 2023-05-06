@@ -115,22 +115,16 @@ namespace ManejoPresupuesto.Services
         public async Task<IEnumerable<ResultadoObtenerPorSemana>> ObtenerPorSemana(ParametroObtenerTransaccionesPorUsuario modelo)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryAsync<ResultadoObtenerPorSemana>(
-                @"
-                    SELECT 
-                        DATEDIF(d, @fechaInicio, FechaTransaccion)/7 + 1 AS Semana,
-                        SUM(Monto) AS Monto,
-                        cat.TipoOperacionId
+            return await connection.QueryAsync<ResultadoObtenerPorSemana>(@"
+                    Select datediff(d, @fechaInicio, FechaTransaccion) / 7 + 1 as Semana,
+                    SUM(Monto) as Monto, cat.TipoOperacionId
                     FROM Transacciones
-                    INNER JOIN Categorias cat 
-                        ON cat.Id = Transacciones.CategoriaId
-                    WHERE 
-                        Transacciones.UsuarioId = @usuarioId AND 
-                        FechaTransaccion BETWEEN @fechaInicio AND @fechaFin
-                    GROUP BY DATEDIF(d, @fechaInicio, FechaTransaccion) / 7, cat.TipoOperacionId;
-                ",
-                modelo
-            );
+                    INNER JOIN Categorias cat
+                    ON cat.Id = Transacciones.CategoriaId
+                    WHERE Transacciones.UsuarioId = @usuarioId AND
+                    FechaTransaccion BETWEEN @fechaInicio and @fechaFin
+                    GROUP BY datediff(d, @fechaInicio, FechaTransaccion) / 7, cat.TipoOperacionId
+                    ", modelo);
         }
 
         public async Task Borrar(int id)
