@@ -96,7 +96,7 @@ namespace ManejoPresupuesto.Controllers
                     Ingreso = x.Where(x => x.TipoOperacionId == TipoOperacion.Ingreso).Select(x => x.Monto).FirstOrDefault(),
                     Gasto = x.Where(x => x.TipoOperacionId == TipoOperacion.Gasto).Select(x => x.Monto).FirstOrDefault(),
                 }).ToList();
-            for (int mes = 0; mes <= 12; mes++)
+            for (int mes = 1; mes <= 12; mes++)
             {
                 var transaccion = transaccionesAgrupadas.FirstOrDefault(x => x.Mes == mes);   
                 var fechaReferencia = new DateTime(año, mes, 1);
