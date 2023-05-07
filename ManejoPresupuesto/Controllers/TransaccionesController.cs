@@ -145,6 +145,23 @@ namespace ManejoPresupuesto.Controllers
             var nombreArchivo = $"Reporte_{fechaInicio.ToString("yyyy")}.xlsx";
             return GenerarExcel(nombreArchivo, transacciones);
         }
+        [HttpGet]
+        public async Task<FileResult> ExportarExcelTodo()
+        {
+            var fechaInicio = DateTime.Today.AddYears(-100);
+            var fechaFin = DateTime.Today.AddYears(1000);
+            var usuarioId = servicioUsuarios.ObtenerUsuarioId();
+            var transacciones = await repositorioTransacciones.ObtenerPorUsuarioId(
+                new ParametroObtenerTransaccionesPorUsuario
+                {
+                    UsuarioId = usuarioId,
+                    FechaInicio = fechaInicio,
+                    FechaFin = fechaFin
+                }
+            );
+            var nombreArchivo = $"Reporte_Todo - {DateTime.Today.ToString("dd-mm-yyyy")}.xlsx";
+            return GenerarExcel(nombreArchivo, transacciones);
+        }
 
         [HttpGet]
         public async Task<FileResult> ExportarExcelPorMes(int mes, int año)
