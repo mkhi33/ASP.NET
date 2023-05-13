@@ -73,7 +73,7 @@ namespace ManejoPresupuesto.Services
 
         public Task<string> GetUserIdAsync(Usuario user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(user.Id.ToString());
         }
 
         public Task<string> GetUserNameAsync(Usuario user, CancellationToken cancellationToken)
