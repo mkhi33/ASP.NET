@@ -3,6 +3,7 @@ using AutoMapper;
 using ClosedXML.Excel;
 using ManejoPresupuesto.Interfaces;
 using ManejoPresupuesto.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -27,7 +28,7 @@ namespace ManejoPresupuesto.Controllers
             this.mapper = mapper;
             this.servicioReportes = servicioReportes;
         }
-
+        [Authorize]
         public async Task<IActionResult> Index(int mes, int año)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
