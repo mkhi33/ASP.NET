@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ManejoPresupuesto.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
 
 namespace ManejoPresupuesto.Controllers
 {
@@ -42,6 +43,13 @@ namespace ManejoPresupuesto.Controllers
                 }
                 return View(model);
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+            return RedirectToAction("Index", "Transacciones");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
