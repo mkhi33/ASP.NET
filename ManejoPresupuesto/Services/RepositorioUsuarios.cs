@@ -1,3 +1,4 @@
+using System.Data;
 using Dapper;
 using ManejoPresupuesto.Interfaces;
 using ManejoPresupuesto.Models;
@@ -18,13 +19,14 @@ namespace ManejoPresupuesto.Services
         {
             usuario.EmailNormalizado = usuario.Email.ToUpper();
             using var connection = new SqlConnection(this.connectionString);
-            var id = await connection.QuerySingleAsync<int>(
+            var UsuarioId = await connection.QuerySingleAsync<int>(
                 @"INSERT INTO Usuarios (Email, EmailNormalizado, PasswordHash) VALUES (@Email, @EmailNormalizado, @PasswordHash);
                 SELECT SCOPE_IDENTITY();
                 ",
                 usuario
             );
-            return id;
+            await connection.ExecuteAsync("CrearDatosUsuarioNuevo", new {UsuarioId}, commandType: CommandType.StoredProcedure);
+            return UsuarioId;
         }
 
         public async Task<Usuario> BuscarUsuarioPorEmail(string emailNormalizado)
