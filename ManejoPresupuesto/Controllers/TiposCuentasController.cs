@@ -67,10 +67,10 @@ namespace ManejoPresupuesto.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ExisteTipoCuenta(string nombre)
+        public async Task<IActionResult> ExisteTipoCuenta(string nombre, int id)
         {
             var usuarioId = servicioUsuarios.ObtenerUsuarioId();
-            var existeTipoCuenta = await repositorioTiposCuentas.Existe(nombre, usuarioId);
+            var existeTipoCuenta = await repositorioTiposCuentas.Existe(nombre, usuarioId, id);
             if (existeTipoCuenta)
             {
                 return Json($"El nombre {nombre} ya existe");

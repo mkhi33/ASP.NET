@@ -11,7 +11,7 @@ namespace ManejoPresupuesto.Models
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "El campo {0} debe tener entre {2} y {1} caracteres")]
         [PrimeraLetraMayuscula]
-        [Remote(action: "ExisteTipoCuenta", controller: "TiposCuentas")]
+        [Remote(action: "ExisteTipoCuenta", controller: "TiposCuentas", AdditionalFields = nameof(Id))]
         public string Nombre { get; set; }
         public int UsuarioId { get; set; }
         public int Orden { get; set; }
