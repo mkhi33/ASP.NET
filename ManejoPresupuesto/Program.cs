@@ -15,6 +15,7 @@ builder.Services.AddTransient<IRepositorioTransacciones, RepositorioTransaccione
 builder.Services.AddTransient<IServicioReportes, ServicioReportes>();
 builder.Services.AddTransient<IRepositorioUsuarios, RepositorioUsuarios>();
 builder.Services.AddTransient<IUserStore<Usuario>, UsuarioStore>();
+builder.Services.AddTransient<SignInManager<Usuario>>();
 builder.Services.AddIdentityCore<Usuario>(opciones =>
 {
     opciones.Password.RequireDigit = false;
