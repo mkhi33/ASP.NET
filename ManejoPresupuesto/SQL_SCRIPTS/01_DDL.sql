@@ -1,6 +1,3 @@
--- DROP SCHEMA dbo;
-
-CREATE SCHEMA dbo;
 -- ManejoPresupuesto.dbo.TiposOperaciones definition
 
 -- Drop table
@@ -90,13 +87,11 @@ CREATE TABLE ManejoPresupuesto.dbo.Transacciones (
 	UsuarioId int NOT NULL,
 	FechaTransaccion datetime NOT NULL,
 	Monto decimal(18,2) NOT NULL,
-	TipoTransaccionId int NOT NULL,
 	Nota nvarchar(1000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 	CuentaId int NOT NULL,
 	CategoriaId int NOT NULL,
 	CONSTRAINT transacciones_PK PRIMARY KEY (Id),
 	CONSTRAINT Transacciones_Categorias_FK FOREIGN KEY (CategoriaId) REFERENCES ManejoPresupuesto.dbo.Categorias(Id),
 	CONSTRAINT Transacciones_Cuentas_FK FOREIGN KEY (CuentaId) REFERENCES ManejoPresupuesto.dbo.Cuentas(Id),
-	CONSTRAINT Transacciones_FK FOREIGN KEY (TipoTransaccionId) REFERENCES ManejoPresupuesto.dbo.TiposOperaciones(Id) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT Transacciones_Usuarios_FK FOREIGN KEY (UsuarioId) REFERENCES ManejoPresupuesto.dbo.Usuarios(Id) ON DELETE CASCADE ON UPDATE CASCADE
 );
