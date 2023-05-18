@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ManejoPresupuesto.Controllers
 {
-    [Authorize]
     public class TransaccionesController : Controller
     {
         private readonly IRepositorioTransacciones repositorioTransacciones;
