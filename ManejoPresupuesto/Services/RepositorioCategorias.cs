@@ -36,6 +36,15 @@ namespace ManejoPresupuesto.Services
                 new { usuarioId }
             );
         }
+
+        public async Task<int> Contar(int usuarioId)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.ExecuteScalarAsync<int>(
+                "SELECT COUNT(*) FROM Categorias WHERE UsuarioId = @usuarioId",
+                new { usuarioId }
+            );
+        }
         public async Task<IEnumerable<Categoria>> Obtener(int usuarioId, TipoOperacion tipoOperacionId)
         {
             using var connection = new SqlConnection(connectionString);
