@@ -30,7 +30,11 @@ builder.Services.AddAuthentication(opciones =>
     opciones.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
     opciones.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
     opciones.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
-}).AddCookie(IdentityConstants.ApplicationScheme);
+}).AddCookie(IdentityConstants.ApplicationScheme, opciones => 
+{
+    opciones.LoginPath = "/Usuarios/Login";
+    opciones.LogoutPath = "/Usuarios/Logout";
+});
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(Program));
