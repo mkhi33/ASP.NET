@@ -28,7 +28,7 @@ namespace ManejoPresupuesto.Controllers
                 Pagina = paginacionViewModel.Pagina,
                 RecordsPorPagina = paginacionViewModel.RecordsPorPagina,
                 CantidadTotalRecords = totalCategorias,
-                BaseURL = "/Categorias"
+                BaseURL = Url.Action()
             };
             return View(respuetaViewModel);
         }
