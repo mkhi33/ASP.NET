@@ -388,7 +388,10 @@ namespace ManejoPresupuesto.Controllers
         private async Task<IEnumerable<SelectListItem>> ObtenerCategorias(int usuarioId, TipoOperacion tipoOperacion)
         {
             var categorias = await repositorioCategorias.Obtener(usuarioId, tipoOperacion);
-            return categorias.Select(x => new SelectListItem(x.Nombre, x.Id.ToString()));
+            var resultado = categorias.Select(x => new SelectListItem(x.Nombre, x.Id.ToString())).ToList();
+            var opcionPorDefecto = new SelectListItem("--- Seleccione una categoría ---", "0", true);
+            resultado.Insert(0, opcionPorDefecto);
+            return resultado;
         }
 
         private async Task<IEnumerable<SelectListItem>> ObtenerCuentas(int usuarioId)
