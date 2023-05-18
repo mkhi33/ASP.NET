@@ -23,6 +23,14 @@ builder.Services.AddIdentityCore<Usuario>(opciones =>
     opciones.Password.RequireNonAlphanumeric = false;
 }
 ).AddErrorDescriber<MensajesDeErrorIdentity>();
+
+builder.Services.AddAuthentication(opciones =>
+{
+    opciones.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+    opciones.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+    opciones.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
+}).AddCookie(IdentityConstants.ApplicationScheme);
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
@@ -39,6 +47,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
