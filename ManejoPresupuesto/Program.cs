@@ -22,7 +22,7 @@ builder.Services.AddIdentityCore<Usuario>(opciones =>
     opciones.Password.RequireUppercase = false;
     opciones.Password.RequireNonAlphanumeric = false;
 }
-);
+).AddErrorDescriber<MensajesDeErrorIdentity>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
