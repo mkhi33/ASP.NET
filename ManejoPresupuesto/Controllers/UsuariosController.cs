@@ -45,6 +45,12 @@ namespace ManejoPresupuesto.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
