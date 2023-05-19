@@ -41,6 +41,21 @@ En este repositorio se encuentran los proyectos realizados en el curso de ASP.NE
 		public DateTime FechaCreacion { get; set; }
 		}
 	}
+
+#### Utilizar Anotaciones de datos para personalizar los campos (DataAnnotations)
+
+       [StringLength(250)]
+       [Required]
+       public string Titulo { get; set; }
+
+#### Utilizar API fluente para personalizar los campos de la Entidad
+En el ApplicationDbContext:
+
+		override protected void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Tarea>().Property(t => t.Titulo).HasMaxLength(50).IsRequired();
+        }
 ### Crear el ApplicationDbContext.cs
     public class ApplicationDbContext : DbContext
     {
