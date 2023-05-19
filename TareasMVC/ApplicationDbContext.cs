@@ -9,6 +9,11 @@ namespace TareasMVC
         {
         }
 
+        // override protected void OnModelCreating(ModelBuilder modelBuilder)
+        // {
+        //     base.OnModelCreating(modelBuilder);
+        //     modelBuilder.Entity<Tarea>().Property(t => t.Titulo).HasMaxLength(50).IsRequired();
+        // }
         public DbSet<Tarea> Tareas { get; set; }
     }
 }
