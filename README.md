@@ -78,3 +78,51 @@ En el ApplicationDbContext:
 ### Actualizar la base de datos a partir de la migración
 
 	dotnet ef update database
+
+# Configurar Identity con Entity Framework Core (ef core):
+
+## instalar el paquete Identity para EF core:
+
+	dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 8.0.0-preview.4.23260.4
+
+## Modificar el ApplicationDbContext
+Cambiar:
+
+	public class ApplicationDbContext : DbContext
+
+a: 
+
+	public class ApplicationDbContext : IdentityDbContext
+
+
+## Crear la migración
+
+	dotnet ef migrations add Usuarios
+
+	dotnet ef database update
+
+## Configurar servicios para la implementación de Identity
+
+	builder.Services.AddAuthentication();
+	builder.Services.AddIdentity<IdentityUser, IdentityRole>(opciones =>
+	{
+		opciones.SignIn.RequireConfirmedAccount = false;
+
+	}).AddEntityFrameworkStores<ApplicationDbContext>()
+	.AddDefaultTokenProviders();
+
+## Configurar servicios para trabajar con vistas propias para el sistema de Usuarios
+
+### Activar el sistema de autenticación por cookies	
+	builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, opciones =>
+	{
+		opciones.LoginPath = "/Usuarios/Login";
+		opciones.AccessDeniedPath = "/Usuarios/Login";
+	}
+	);
+
+## Obtener la data del usuario autenticado
+
+antes de app.useAuthorization()
+	
+	app.UseAuthentication();
