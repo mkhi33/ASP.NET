@@ -13,5 +13,6 @@ namespace TareasMVC.Entidades
        public int Orden { get; set; }
        public DateTime FechaCreacion { get; set; }
        public List<Paso> Pasos { get; set; }
+       public List<ArchivoAdjunto> ArchivosAdjuntos { get; set; }
     }
 }
