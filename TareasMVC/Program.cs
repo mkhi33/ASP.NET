@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TareasMVC;
@@ -15,6 +16,14 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(opciones =>
 
 }).AddEntityFrameworkStores<ApplicationDbContext>()
   .AddDefaultTokenProviders();
+
+builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, opciones =>
+{
+    opciones.LoginPath = "/Usuarios/Login";
+    opciones.AccessDeniedPath = "/Usuarios/Login";
+}
+);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,7 +38,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
