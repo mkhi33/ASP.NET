@@ -168,3 +168,25 @@ antes de app.useAuthorization()
                 return View(modelo);
             }
         }
+
+## Autenticación de usuarios
+
+    	[HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginViewModel modelo)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(modelo);
+            }
+            var resultado = await signInManager.PasswordSignInAsync(modelo.Email, modelo.Password, modelo.Recuerdame, lockoutOnFailure: false);
+            if(resultado.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Usuario o contraseña no válido");
+                return View(modelo);
+            }
+        }
