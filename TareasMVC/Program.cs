@@ -1,9 +1,20 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using TareasMVC;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var politicasUsuarioAutenticados = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+
+builder.Services.AddControllersWithViews(opciones =>
+{
+    opciones.Filters.Add(new AuthorizeFilter(politicasUsuarioAutenticados));
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

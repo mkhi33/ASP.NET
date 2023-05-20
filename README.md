@@ -126,3 +126,14 @@ a:
 antes de app.useAuthorization()
 	
 	app.UseAuthentication();
+
+## Crear una política para usuarios autenticados:
+
+	var politicasUsuarioAutenticados = new AuthorizationPolicyBuilder()
+		.RequireAuthenticatedUser()
+		.Build();
+
+	builder.Services.AddControllersWithViews(opciones =>
+	{
+		opciones.Filters.Add(new AuthorizeFilter(politicasUsuarioAutenticados));
+	});
