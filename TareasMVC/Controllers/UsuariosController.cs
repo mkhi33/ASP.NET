@@ -84,7 +84,7 @@ namespace TareasMVC.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
-            return RedirectToAction("Index", "Transacciones");
+            return RedirectToAction("Index", "Home");
         }
     }
 
