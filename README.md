@@ -190,3 +190,12 @@ antes de app.useAuthorization()
                 return View(modelo);
             }
         }
+
+## Cerrar la sesión del usuario
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+            return RedirectToAction("Index", "Transacciones");
+        }
