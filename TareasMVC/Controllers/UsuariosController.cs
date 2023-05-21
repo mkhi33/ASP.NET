@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using TareasMVC.Servicios;
 
 namespace TareasMVC.Controllers
 {
@@ -167,11 +168,34 @@ namespace TareasMVC.Controllers
             {
                 Email = u.Email,
             }).ToListAsync();
-            var modelo = new UsuariosListadoViewModel()
+            var modelo = new UsuariosListadoViewModel();
             modelo.Usuarios = usuarios;
             modelo.Mensaje = mensaje;
             return View(modelo);
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> HacerAdmin(string email)
+        {
+            var usuario = await context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+            if(usuario is null)
+            {
+                return NotFound();
+            }
+            await userManager.AddToRoleAsync(usuario, Constantes.RolAdmin);
+            return RedirectToAction("Listado", routeValues: new { mensaje = $"El usuario {email} ahora es administrador" });
+        }
+        [HttpPost]
+        public async Task<IActionResult> RemoverAdmin(string email)
+        {
+            var usuario = await context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+            if(usuario is null)
+            {
+                return NotFound();
+            }
+            await userManager.RemoveFromRoleAsync(usuario, Constantes.RolAdmin);
+            return RedirectToAction("Listado", routeValues: new { mensaje = $"El usuario {email} ya no es administrador" });
         }
 
 
