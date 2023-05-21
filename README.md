@@ -25,7 +25,7 @@ En este repositorio se encuentran los proyectos realizados en el curso de ASP.NE
  appsettings.Development.json
 
 	"ConnectionStrings": {
-    	"DefaultConnection": "Server=localhost;Database=Proyecto3MVCTareas;User=sa;Password=@Demon2017;Trusted_Connection=False;MultipleActiveResultSets=true;TrustServerCertificate=True"
+    	"DefaultConnection": "Server=localhost;Database=Proyecto3MVCTareas;User=sa;Password=TU_PASSWORD;Trusted_Connection=False;MultipleActiveResultSets=true;TrustServerCertificate=True"
   	},
 
 ### Crear una Entidad para representar una tabla en la Base de datos
