@@ -5,10 +5,11 @@
 }
 
 <h1>Login</h1>
-@if(ViewData.Keys.Contains("mensaje")){
+@if (ViewData.Keys.Contains("mensaje"))
+{
     <p style="color:red;">
-        @ViewData["mensaje"]
-    </p>
+    @ViewData["mensaje"]
+</p>
 
 }
 <div class="card"></div>
@@ -31,6 +32,8 @@
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
         <a asp-action="Registro" class="btn btn-secondary">Crear una nueva cuenta</a>
+        <a class="btn btn-success" asp-action="LoginExterno" asp-route-proveedor="Microsoft">Continuar con Microsoft</a>
+
     </form>
 </div>
 
