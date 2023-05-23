@@ -199,3 +199,19 @@ antes de app.useAuthorization()
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
             return RedirectToAction("Index", "Transacciones");
         }
+
+# Internacionalización
+
+    Es el proceso de tener una aplicación que funcione para distintas culturas.
+Se divide en dos partes:
+- Globalización
+- Localozación
+
+## Globalización:
+
+    Es el proceso de diseñar una aplicación para que funcione con distintas culturas.
+## Localización:
+
+    Es el proceso de tomar una aplicación globalizada y aplicarle una cultura especifica.
+
+
