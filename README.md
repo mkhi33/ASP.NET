@@ -256,4 +256,11 @@ Implementanto Localización en homeController:
             opciones.ResourcesPath = "Recursos";
         });
 
+## Implementar ViewLocalization
+
+        // Add services to the container.
+        builder.Services.AddControllersWithViews(opciones => 
+        {
+            opciones.Filters.Add(new AuthorizeFilter(politicasUsuarioAutenticados));
+        }).AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
 

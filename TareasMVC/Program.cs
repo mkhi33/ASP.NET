@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using TareasMVC;
 
@@ -13,13 +14,11 @@ var politicasUsuarioAutenticados = new AuthorizationPolicyBuilder()
     .RequireAuthenticatedUser()
     .Build();
 
-builder.Services.AddControllersWithViews(opciones =>
+// Add services to the container.
+builder.Services.AddControllersWithViews(opciones => 
 {
     opciones.Filters.Add(new AuthorizeFilter(politicasUsuarioAutenticados));
-});
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+}).AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
 
 builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseSqlServer("name=DefaultConnection"));
 builder.Services.AddAuthentication().AddMicrosoftAccount(opciones =>
