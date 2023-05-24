@@ -238,3 +238,13 @@ Implementanto Localización en homeController:
             return View();
         }
 
+## Configurar Program.cs para soportar diferentes culturas:
+
+    var culturasUISoportadas = new[] { "es", "en" };
+    app.UseRequestLocalization(opciones =>
+    {
+        opciones.DefaultRequestCulture = new RequestCulture("es");
+        opciones.SupportedCultures = culturasUISoportadas.Select(cultura => new CultureInfo(cultura)).ToList();
+    });
+
+

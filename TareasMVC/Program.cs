@@ -22,7 +22,8 @@ builder.Services.AddControllersWithViews(opciones =>
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(opciones => opciones.UseSqlServer("name=DefaultConnection"));
-builder.Services.AddAuthentication().AddMicrosoftAccount( opciones => {
+builder.Services.AddAuthentication().AddMicrosoftAccount(opciones =>
+{
     opciones.ClientId = builder.Configuration["MicrosoftClientId"];
     opciones.ClientSecret = builder.Configuration["MicrosoftSecretId"];
 });
@@ -41,6 +42,13 @@ builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.Ap
 );
 builder.Services.AddLocalization();
 var app = builder.Build();
+
+var culturasUISoportadas = new[] { "es", "en" };
+app.UseRequestLocalization(opciones =>
+{
+    opciones.DefaultRequestCulture = new RequestCulture("es");
+    opciones.SupportedCultures = culturasUISoportadas.Select(cultura => new CultureInfo(cultura)).ToList();
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
