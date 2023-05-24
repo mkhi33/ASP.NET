@@ -1,6 +1,8 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using TareasMVC;
@@ -37,7 +39,7 @@ builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.Ap
     opciones.AccessDeniedPath = "/Usuarios/Login";
 }
 );
-
+builder.Services.AddLocalization();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

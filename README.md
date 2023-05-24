@@ -214,4 +214,27 @@ Se divide en dos partes:
 
     Es el proceso de tomar una aplicación globalizada y aplicarle una cultura especifica.
 
+### Configurar localización en ASP.NET
+
+En la clase Program.cs
+
+    builder.Services.AddLocalization();
+
+Implementanto Localización en homeController:
+
+- Inyección de dependencia IStringLocalizer:
+
+        public HomeController(ILogger<HomeController> logger, IStringLocalizer<HomeController> localizer)
+        {
+            _logger = logger;
+            this.localizer = localizer;
+        }
+
+- Utilizando localizer (Ejemplo utilizando el ViewBag):
+
+        public IActionResult Index()
+        {
+            ViewBag.Saludo = localizer["Buenos días"];
+            return View();
+        }
 
