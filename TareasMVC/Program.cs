@@ -40,7 +40,10 @@ builder.Services.PostConfigure<CookieAuthenticationOptions>(IdentityConstants.Ap
     opciones.AccessDeniedPath = "/Usuarios/Login";
 }
 );
-builder.Services.AddLocalization();
+builder.Services.AddLocalization(opciones =>
+{
+    opciones.ResourcesPath = "Recursos";
+});
 var app = builder.Build();
 
 var culturasUISoportadas = new[] { "es", "en" };

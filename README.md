@@ -247,4 +247,13 @@ Implementanto Localización en homeController:
         opciones.SupportedCultures = culturasUISoportadas.Select(cultura => new CultureInfo(cultura)).ToList();
     });
 
+## Configurar la carpeta de recursos
+
+- Crear la carpeta Recursos en la raíz.
+
+        builder.Services.AddLocalization(opciones =>
+        {
+            opciones.ResourcesPath = "Recursos";
+        });
+
 
