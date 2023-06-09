@@ -35,6 +35,30 @@ foreach (MemberInfo miembro in miembros)
 
 En este ejemplo, `typeof(MiClase)` devuelve un objeto `Type` que representa el tipo de la clase MiClase. A partir de este objeto Type, se puede obtener información sobre los miembros del tipo utilizando métodos como `GetMembers()`. En este caso, se recorren los miembros y se imprime el nombre de cada uno.
 
+## Clase `Type`
+```C#
+
+static void Main(string[] args)
+{
+    int a = 15;
+    Type type = a.GetType();
+    Console.WriteLine(type);
+}
+```
+En este ejemplo, la salida es: `System.Int32` que es el tipo de dato de la variable a.
+
+```C#
+static void Main(string[] args)
+{
+    int a = 15;
+    Type type = a.GetType();
+    Console.WriteLine(type.FullName);
+}
+```
+En este ejemplo, `type.FullName` devuelve el nombre completo de la clase.
+
 ## Conclusiones
 
 La reflexión en .NET es una característica poderosa que le permite examinar y manipular tipos en tiempo de ejecución. Le permite obtener información sobre los miembros de un tipo, crear instancias dinámicamente e invocar métodos y propiedades en tiempo de ejecución. Si bien la reflexión puede ser útil en ciertos escenarios, es importante tener en cuenta que también tiene un impacto en el rendimiento y puede llevar a un código menos seguro si no se utiliza correctamente. Por lo tanto, se recomienda utilizar la reflexión con cuidado y considerar alternativas más estáticas cuando sea posible.
+
+

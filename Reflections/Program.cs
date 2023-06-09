@@ -5,7 +5,9 @@ namespace Reflections
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            int a = 15;
+            Type type = a.GetType();
+            Console.WriteLine(type.FullName);
         }
     }
 }
