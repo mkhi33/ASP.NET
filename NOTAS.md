@@ -48,3 +48,29 @@ J --> K((En noviembre de cada año sale una versión nueva de .NET))
 - WEB Api's: Se usa cuando no queremos generar interfaces de usuarios.
 - Blazor: Enviar el código de C# al navegador del usuario. Blazor es una tecnología de ASP.NET que nos permite crear aplicaciones web interactivas.
 - gRPC: Framework que permite hacer llamadas de procedimientos remoto. Nos permite comunicarnos de manera muy rápida entre diferentes aplicaciones.
+# Linea de comandos DOTNET
+Para crear un nuevo proyecto MVC:
+
+	dotnet new mvc -n NombreProyecto
+	dotnet new <tipo de proyecto>
+Para restaurar las dependencias del proyecto:
+
+	dotnet restore
+Para compilar el proyecto
+	
+	dotnet build
+Para ejecutar la aplicación:
+
+	dotnet run
+Para agregar un paquete de nuget al proyecto:
+
+	dotnet add package <nombre_del_paquete>
+Para instalar las herramientas del proyecto:
+
+	dotnet tool restore
+Publicar la aplicación para distribución:
+	
+	dotnet publish -c Release
+Generar un nuevo middleware o controlador en ASP.NET Core:
+
+	dotnet aspnet-codegenerator controller -name MiControlador -m MiModelo -dc MiContexto --relativeFolderPath Controllers --useDefaultLayout
