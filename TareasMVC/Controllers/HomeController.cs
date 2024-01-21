@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using TareasMVC.Models;
@@ -18,13 +19,17 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        ViewBag.Saludo = localizer["Buenos días"];
         return View();
     }
 
-    public IActionResult Privacy()
-    {
-        return View();
+    [HttpPost]
+    public IActionResult CambiarIdioma(string cultura, string urlRetorno){
+        Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+        CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(cultura)),
+        new CookieOptions {Expires = DateTimeOffset.UtcNow.AddYears(5)}
+        );
+
+        return LocalRedirect(urlRetorno);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
