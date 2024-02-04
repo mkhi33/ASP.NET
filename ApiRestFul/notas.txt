@@ -1,0 +1,13 @@
+1. Crear el proyecto desde la linea de comandos:
+
+    dotnet new webapi --name ApiPeliculas 
+
+2. Crear una solución desde la linea de comandos:
+
+    dotnet new solution --name ApiPeliculas
+
+3. Agregar el proyecto a la solución
+
+    dotnet sln add ApiPeliculas
+
+4. 
