@@ -31,3 +31,4 @@
 *.db
 .vs/
 Publish/
+.fake
