@@ -1,5 +1,9 @@
 using ApiPeliculas.Data;
+using ApiPeliculas.Repositorio;
+using ApiPeliculas.Repositorio.IRepositorio;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using ApiPeliculas.PeliculasMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,11 +13,17 @@ builder.Services.AddDbContext<ApplicationDBContext>(opciones =>
     opciones.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+// Agregar los repositorios al sistema de inyección de dependencias.
+builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+
+// Agregar Automapper
+builder.Services.AddAutoMapper((typeof(PeliculasMapper)));
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddControllers();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +39,7 @@ var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
+
 
 app.MapGet("/weatherforecast", () =>
 {
