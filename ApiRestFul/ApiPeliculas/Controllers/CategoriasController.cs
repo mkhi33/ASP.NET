@@ -1,4 +1,5 @@
 
+using ApiPeliculas.Models;
 using ApiPeliculas.Models.Dtos;
 using ApiPeliculas.Repositorio.IRepositorio;
 using AutoMapper;
@@ -47,7 +48,36 @@ namespace ApiPeliculas.Controllers
                 return NotFound();
             }
             CategoriaDto categoriaDto = _mapper.Map<CategoriaDto>(categoria);
-            return Ok(categoria);
+            return Ok(categoriaDto);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(201, Type = typeof(CategoriaDto))]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult CrearCategoria([FromBody] CrearCategoriaDto crearCategoriaDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (crearCategoriaDto == null)
+            {
+                return BadRequest(ModelState);
+            }
+            if (_ctRepo.ExisteCategoria(crearCategoriaDto.Nombre))
+            {
+                ModelState.AddModelError("", "La categoria ya existe");
+                return StatusCode(404, ModelState);
+            }
+            Categoria categoria = _mapper.Map<Categoria>(crearCategoriaDto);
+
+            if(!_ctRepo.CrearCategoria(categoria)){
+                ModelState.AddModelError("", $"Algo salió mal guardando el registro{categoria.Nombre}");
+                return StatusCode(500, ModelState);
+            }
+            return CreatedAtRoute("GetCategoria", new { categoriaId = categoria.Id}, categoria);
         }
 
 
