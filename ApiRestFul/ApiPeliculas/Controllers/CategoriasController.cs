@@ -22,6 +22,8 @@ namespace ApiPeliculas.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult GetCategorias()
         {
             var listaCategorias = _ctRepo.GetCategorias();
