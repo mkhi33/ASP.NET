@@ -1,6 +1,7 @@
 
 using ApiPeliculas.Models;
 using ApiPeliculas.Models.Dtos;
+using ApiPeliculas.Repositorio;
 using ApiPeliculas.Repositorio.IRepositorio;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -105,5 +106,27 @@ namespace ApiPeliculas.Controllers
             }
             return NoContent();
         }
+
+        [HttpDelete("categoriaId:int", Name = "BorrarCategoria")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult BorrarCategoria(int categoriaId)
+        {
+            if (!_ctRepo.ExisteCategoria(categoriaId))
+            {
+                return NotFound();
+            }
+            Categoria categoria = _ctRepo.GetCategoria(categoriaId);
+
+            if (!_ctRepo.BorrarCategoria(categoria))
+            {
+                ModelState.AddModelError("", $"Algo salió mal eliminando el registro{categoria.Nombre}");
+                return StatusCode(500, ModelState);
+            }
+            return NoContent();
+        }
+
     }
 }
