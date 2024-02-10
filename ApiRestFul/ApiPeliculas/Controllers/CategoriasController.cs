@@ -35,5 +35,21 @@ namespace ApiPeliculas.Controllers
             return Ok(listaCategoriasDto);
         }
 
+        [HttpGet("categoriaId:int", Name = "GetCategoria")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetCategoria(int categoriaId)
+        {
+            var categoria = _ctRepo.GetCategoria(categoriaId);
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+            CategoriaDto categoriaDto = _mapper.Map<CategoriaDto>(categoria);
+            return Ok(categoria);
+        }
+
+
     }
 }
