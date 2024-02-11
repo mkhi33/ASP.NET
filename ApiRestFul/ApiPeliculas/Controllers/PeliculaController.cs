@@ -132,5 +132,23 @@ namespace ApiPeliculas.Controllers
             }
             return Ok(listaPeliculasDto);
         }
+        [HttpGet("Buscar")]
+        public IActionResult Buscar(string nombre)
+        {
+            try
+            {
+                var resultado = _pelRepo.BuscarPelicula(nombre.Trim());
+                if(resultado.Any()){
+                    return Ok(resultado);
+                }
+                return NotFound();
+                
+            }
+            catch (System.Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error recuperando datos");
+            }
+
+        }
     }
 }
