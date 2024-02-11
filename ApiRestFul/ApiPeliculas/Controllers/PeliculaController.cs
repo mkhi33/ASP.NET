@@ -118,5 +118,19 @@ namespace ApiPeliculas.Controllers
             }
             return NoContent();
         }
+        [HttpGet("GetPeliculasEnCategoria/{categoriaId:int}")]
+        public IActionResult GetPeliculasEnCategoria(int categoriaId)
+        {
+            var listaPeliculas = _pelRepo.GetPeliculasEnCategoria(categoriaId);
+            if(listaPeliculas == null){
+                return NotFound();
+            }
+            var listaPeliculasDto = new List<PeliculaDto>();
+            foreach (var pelicula in listaPeliculas)
+            {
+                listaPeliculasDto.Add(_mapper.Map<PeliculaDto>(pelicula));
+            }
+            return Ok(listaPeliculasDto);
+        }
     }
 }
