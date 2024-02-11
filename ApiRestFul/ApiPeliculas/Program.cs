@@ -15,6 +15,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(opciones =>
 
 // Agregar los repositorios al sistema de inyección de dependencias.
 builder.Services.AddScoped<ICategoriaRepositorio, CategoriaRepositorio>();
+builder.Services.AddScoped<IPeliculaRepositorio, PeliculaRepositorio>();
 
 // Agregar Automapper
 builder.Services.AddAutoMapper((typeof(PeliculasMapper)));
